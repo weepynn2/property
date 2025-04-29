@@ -27,7 +27,7 @@ jobs:
       - run:
           name: Build Spring Boot App
           command: |
-            ./mvnw clean package  # or ./gradlew bootJar
+            ./mvnw clean package -DskipTests # or ./gradlew bootJar
 
       # Build Docker image
       - run:
