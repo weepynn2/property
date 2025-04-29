@@ -5947,3 +5947,42 @@ Caused by: java.lang.ClassNotFoundException: org.springframework.security.core.u
 20:15:10.676 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 20:15:10.678 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
 20:15:10.699 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+21:46:14.146 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.g3.property.controller.ListingControllerSITTest]: ListingControllerSITTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:46:14.812 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.g3.property.PropertyApplication for test class com.g3.property.controller.ListingControllerSITTest
+21:46:15.750 [main] INFO  o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+21:46:17.035 [main] INFO  c.g.p.c.ListingControllerSITTest - Starting ListingControllerSITTest using Java 17.0.13 with PID 93187 (started by wp in /mnt/c/Users/User/Desktop/SCTP Software Engineering/Module 4/property)
+21:46:17.037 [main] INFO  c.g.p.c.ListingControllerSITTest - No active profile set, falling back to 1 default profile: "default"
+21:46:20.416 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+21:46:20.911 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 432 ms. Found 3 JPA repository interfaces.
+21:46:25.260 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+21:46:25.470 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+21:46:25.267 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@48b3b1b8
+21:46:25.285 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+21:46:31.087 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+21:46:33.056 [main] INFO  com.g3.property.util.DataLoader - loading data
+21:46:33.793 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+21:46:35.701 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+21:46:35.702 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+21:46:35.706 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 2 ms
+21:46:35.841 [main] INFO  c.g.p.c.ListingControllerSITTest - Started ListingControllerSITTest in 20.165 seconds (process running for 25.988)
+21:46:38.816 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.g3.property.PropertyApplicationTests]: PropertyApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:46:38.950 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.g3.property.PropertyApplication for test class com.g3.property.PropertyApplicationTests
+21:46:38.976 [main] INFO  o.s.b.d.r.RestartApplicationListener - Restart disabled due to context in which it is running
+21:46:39.130 [main] INFO  c.g.p.PropertyApplicationTests - Starting PropertyApplicationTests using Java 17.0.13 with PID 93187 (started by wp in /mnt/c/Users/User/Desktop/SCTP Software Engineering/Module 4/property)
+21:46:39.131 [main] INFO  c.g.p.PropertyApplicationTests - No active profile set, falling back to 1 default profile: "default"
+21:46:40.415 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+21:46:40.823 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 404 ms. Found 3 JPA repository interfaces.
+21:46:41.418 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+21:46:41.430 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+21:46:41.459 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@751e7d99
+21:46:41.460 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+21:46:42.404 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+21:46:42.534 [main] INFO  com.g3.property.util.DataLoader - loading data
+21:46:42.635 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+21:46:42.971 [main] INFO  c.g.p.PropertyApplicationTests - Started PropertyApplicationTests in 3.996 seconds (process running for 33.118)
+21:46:43.080 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+21:46:43.089 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+21:46:43.123 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+21:46:43.126 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+21:46:43.127 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+21:46:43.148 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
