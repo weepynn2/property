@@ -5,7 +5,7 @@ FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /app
 
 # Copy built JAR file from target folder to the container
-COPY target/*.jar app.jar
+COPY target/target/property-0.0.1-SNAPSHOT.jar app.jar
 
 # Default environment variable fallback (can be overridden at runtime)
 ENV JAVA_OPTS=""

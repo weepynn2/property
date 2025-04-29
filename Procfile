@@ -1,3 +1,5 @@
-web: java -Dspring.profiles.active=prod -jar app.jar
+web: java -jar target/property-0.0.1-SNAPSHOT.jar
+
+
 
 
