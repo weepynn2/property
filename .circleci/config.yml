@@ -62,7 +62,7 @@ jobs:
 
       - run:
           name: Build Docker Image
-          command: docker build -t registry.heroku.com/$weepynn-spring-boot-app/web .
+          command: docker build -t registry.heroku.com/weepynn-spring-boot-app/web .
 
       - run:
           name: Heroku Container Registry Login
@@ -71,7 +71,7 @@ jobs:
 
       - run:
           name: Push Docker Image to Heroku
-          command: docker push registry.heroku.com/$weepynn-spring-boot-app/web
+          command: docker push registry.heroku.com/weepynn-spring-boot-app/web
 
       - run:
           name: Release Docker Image on Heroku
