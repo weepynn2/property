@@ -9,7 +9,7 @@ jobs:
   test:
     docker:
       - image: cimg/openjdk:17.0
-      - image: cimg/postgres:14.8  # PostgreSQL service container
+      - image: cimg/postgres:14.8
         environment:
           POSTGRES_DB: property
           POSTGRES_USER: postgres
@@ -41,7 +41,7 @@ jobs:
   build-and-deploy:
     executor: docker-executor
     environment:
-      SPRING_PROFILES_ACTIVE: prod  # Use production profile for deployment
+      SPRING_PROFILES_ACTIVE: prod
     steps:
       - checkout
       - setup_remote_docker:
@@ -57,8 +57,8 @@ jobs:
           command: chmod +x ./mvnw
 
       - run:
-          name: Build Spring Boot App
-          command: ./mvnw clean package -DskipTests
+          name: Build Spring Boot App using prod profile
+          command: SPRING_PROFILES_ACTIVE=prod ./mvnw clean package -DskipTests
 
       - run:
           name: Build Docker Image
