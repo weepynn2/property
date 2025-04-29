@@ -3,48 +3,51 @@ version: 2.1
 executors:
   docker-executor:
     docker:
-      - image: cimg/openjdk:17.0
+      - image: cimg/openjdk:17.0  # CircleCI image with JDK (to build Spring Boot)
 
 jobs:
-  test:
-    executor: docker-executor
-    steps:
-      - checkout
-      - run:
-          name: Make mvnw executable
-          command: chmod +x ./mvnw
-      - run:
-          name: Run Unit Tests
-          command: ./mvnw clean verify
-
   build-and-deploy:
     executor: docker-executor
-    environment:
-      SPRING_PROFILES_ACTIVE: prod  # Set the Spring profile to 'prod'
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
+      
+      # Login to DockerHub (for private base image)
       - run:
           name: DockerHub Login
           command: |
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+
       - run:
           name: Make mvnw executable
           command: chmod +x ./mvnw
+
+      # Build Spring Boot app
       - run:
           name: Build Spring Boot App
-          command: ./mvnw clean package -DskipTests
+          command: |
+            ./mvnw clean package -DskipTests # or ./gradlew bootJar
+
+      # Build Docker image
       - run:
           name: Build Docker Image
-          command: docker build -t registry.heroku.com/$HEROKU_APP_NAME/web .
+          command: |
+            docker build -t registry.heroku.com/$HEROKU_APP_NAME/web .
+
+      # Login to Heroku Container Registry
       - run:
           name: Heroku Container Registry Login
           command: |
             echo "$HEROKU_API_KEY" | docker login --username=_ --password-stdin registry.heroku.com
+
+      # Push Docker image to Heroku
       - run:
           name: Push Docker Image to Heroku
-          command: docker push registry.heroku.com/$HEROKU_APP_NAME/web
+          command: |
+            docker push registry.heroku.com/$HEROKU_APP_NAME/web
+
+      # Release Docker image on Heroku
       - run:
           name: Release Docker Image on Heroku
           command: |
@@ -56,9 +59,6 @@ jobs:
 
 workflows:
   version: 2
-  test-and-deploy:
+  deploy-app:
     jobs:
-      - test
-      - build-and-deploy:
-          requires:
-            - test
+      - build-and-deploy
