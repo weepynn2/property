@@ -86,9 +86,6 @@
 	</dependencies>
 
 	<build>
-
-		<finalName>property</finalName>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
