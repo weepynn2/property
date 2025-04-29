@@ -7,44 +7,72 @@ executors:
 
 jobs:
   test:
-    executor: docker-executor
+    docker:
+      - image: cimg/openjdk:17.0
+      - image: cimg/postgres:14.8  # PostgreSQL service container
+        environment:
+          POSTGRES_DB: property
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD:
     steps:
       - checkout
+
+      - run:
+          name: Wait for PostgreSQL to be ready
+          command: |
+            for i in `seq 1 20`; do
+              nc -z localhost 5432 && echo "Postgres is up" && break
+              echo "Waiting for Postgres..."
+              sleep 3
+            done
+
       - run:
           name: Make mvnw executable
           command: chmod +x ./mvnw
+
       - run:
-          name: Run Unit Tests
-          command: ./mvnw clean verify
+          name: Print Active Spring Profile
+          command: echo "Active Profile: $SPRING_PROFILES_ACTIVE"
+
+      - run:
+          name: Run Unit + Integration Tests with PostgreSQL
+          command: SPRING_PROFILES_ACTIVE=test ./mvnw clean verify -X
 
   build-and-deploy:
     executor: docker-executor
     environment:
-      SPRING_PROFILES_ACTIVE: prod  # Set the Spring profile to 'prod'
+      SPRING_PROFILES_ACTIVE: prod  # Use production profile for deployment
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
+
       - run:
           name: DockerHub Login
           command: |
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+
       - run:
           name: Make mvnw executable
           command: chmod +x ./mvnw
+
       - run:
           name: Build Spring Boot App
           command: ./mvnw clean package -DskipTests
+
       - run:
           name: Build Docker Image
           command: docker build -t registry.heroku.com/$HEROKU_APP_NAME/web .
+
       - run:
           name: Heroku Container Registry Login
           command: |
             echo "$HEROKU_API_KEY" | docker login --username=_ --password-stdin registry.heroku.com
+
       - run:
           name: Push Docker Image to Heroku
           command: docker push registry.heroku.com/$HEROKU_APP_NAME/web
+
       - run:
           name: Release Docker Image on Heroku
           command: |
