@@ -1,2 +1,3 @@
-web: java -jar target/your-app-name.jar
+web: java -Dspring.profiles.active=prod -jar app.jar
+
 
