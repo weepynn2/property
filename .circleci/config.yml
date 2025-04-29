@@ -20,8 +20,8 @@ jobs:
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
 
       - run:
-        name: Make mvnw executable
-        command: chmod +x ./mvnw
+          name: Make mvnw executable
+          command: chmod +x ./mvnw
 
       # Build Spring Boot app
       - run:
