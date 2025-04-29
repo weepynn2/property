@@ -1,0 +1,60 @@
+version: 2.1
+
+executors:
+  docker-executor:
+    docker:
+      - image: cimg/openjdk:17.0  # CircleCI image with JDK (to build Spring Boot)
+
+jobs:
+  build-and-deploy:
+    executor: docker-executor
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      
+      # Login to DockerHub (for private base image)
+      - run:
+          name: DockerHub Login
+          command: |
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+      # Build Spring Boot app
+      - run:
+          name: Build Spring Boot App
+          command: |
+            ./mvnw clean package  # or ./gradlew bootJar
+
+      # Build Docker image
+      - run:
+          name: Build Docker Image
+          command: |
+            docker build -t registry.heroku.com/$HEROKU_APP_NAME/web .
+
+      # Login to Heroku Container Registry
+      - run:
+          name: Heroku Container Registry Login
+          command: |
+            echo "$HEROKU_API_KEY" | docker login --username=_ --password-stdin registry.heroku.com
+
+      # Push Docker image to Heroku
+      - run:
+          name: Push Docker Image to Heroku
+          command: |
+            docker push registry.heroku.com/$HEROKU_APP_NAME/web
+
+      # Release Docker image on Heroku
+      - run:
+          name: Release Docker Image on Heroku
+          command: |
+            curl -n -X PATCH https://api.heroku.com/apps/$HEROKU_APP_NAME/formation \
+              -d '{"updates":[{"type":"web","docker_image":"'"$(docker inspect registry.heroku.com/$HEROKU_APP_NAME/web --format={{.Id}})"'"}]}' \
+              -H "Content-Type: application/json" \
+              -H "Accept: application/vnd.heroku+json; version=3.docker-releases" \
+              -H "Authorization: Bearer $HEROKU_API_KEY"
+
+workflows:
+  version: 2
+  deploy-app:
+    jobs:
+      - build-and-deploy
