@@ -23,7 +23,6 @@ import com.g3.property.service.ListingService;
 import com.g3.property.repository.AgentRepository;
 
 
-
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ListingControllerUnitTest {
