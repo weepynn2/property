@@ -8,4 +8,4 @@ WORKDIR /app
 COPY target/property-0.0.1-SNAPSHOT.jar property.jar
 
 # Set the entrypoint for the container to run the Spring Boot application
-ENTRYPOINT ["java", "-jar", "/app/property.jar"]
+ENTRYPOINT ["java", "-jar", "property.jar"]
