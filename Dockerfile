@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the built Spring Boot JAR file into the container
-COPY target/demo-0.0.1-SNAPSHOT.jar demo.jar
+COPY target/property-0.0.1-SNAPSHOT.jar spring-boot-app.jar
 
 # Set the entrypoint for the container to run the Spring Boot application
 ENTRYPOINT ["java", "-jar", "/app/demo.jar"]
