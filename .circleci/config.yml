@@ -32,7 +32,7 @@ jobs:
 
       - run:
           name: Print Active Spring Profile
-          command: echo "Active Profile: $SPRING_PROFILES_ACTIVE"
+          command: 'echo "Active Profile: $SPRING_PROFILES_ACTIVE"'
 
       - run:
           name: Run Unit + Integration Tests with PostgreSQL
