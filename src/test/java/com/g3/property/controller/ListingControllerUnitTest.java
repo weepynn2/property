@@ -1,6 +1,7 @@
 package com.g3.property.controller;
 
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -23,7 +25,8 @@ import com.g3.property.service.ListingService;
 import com.g3.property.repository.AgentRepository;
 
 
-@SpringBootTest
+//@SpringBootTest
+@WebMvcTest(controllers = ListingController.class)
 @AutoConfigureMockMvc
 public class ListingControllerUnitTest {
 
@@ -33,13 +36,13 @@ public class ListingControllerUnitTest {
     @Autowired
     private ObjectMapper objectMapper; // convertion of Java object to JSON
 
-    @Mock
+    @MockitoBean
 	private ListingRepository listingRepository;
 
-    @Mock
+    @MockitoBean
     private ListingService listingService;
 
-    @Mock
+    @MockitoBean
     private AgentRepository agentRepository;
 
     @DisplayName("Listing creation Controller layer Unit test")
